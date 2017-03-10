@@ -1,0 +1,30 @@
+{
+  "base": "semantic\\",
+  "paths": {
+    "source": {
+      "config": "src/theme.config",
+      "definitions": "src/definitions/",
+      "site": "src\\site\\",
+      "themes": "src/themes/"
+    },
+    "output": {
+      "packaged": "dist\\",
+      "uncompressed": "dist\\components\\",
+      "compressed": "dist\\components\\",
+      "themes": "dist/themes/"
+    },
+    "clean": "dist/"
+  },
+  "permission": false,
+  "rtl": "No",
+  "components": [
+    "site",
+    "header",
+    "container",
+    "form",
+    "grid",
+    "message",
+    "form"
+  ],
+  "version": "2.0.8"
+}

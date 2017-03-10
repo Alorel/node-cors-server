@@ -1,7 +1,16 @@
 doctype html
 html
   head
+    meta(charset != 'utf8')
+    meta(name!= 'language', content!= 'en')
+    meta(content!= 'follow, index, all', name!='robots')
+    meta(name != 'viewport', content!='width=device-width, initial-scale=1')
     title= title
-    link(rel!='stylesheet', href!='/stylesheets/style.css')
+    link(rel!='stylesheet', href!='/static/semantic.min.css')
+    link(rel!='shortcut icon' type!='image/x-icon' href!= '/static/favicon.ico')
   body
-    block content
+    .ui.grid.container
+      .row
+        h1.column.ui.header= title
+      block content
+      block scripts

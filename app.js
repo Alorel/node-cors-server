@@ -2,14 +2,23 @@ const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const app = express();
+const compression = require('compression');
+const compressionCfg = {
+    filter: () => {
+        return true
+    },
+    threshold: 0
+};
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(require('./lib/deny-non-get'));
 app.use(require('./lib/headers').middleware);
+app.use(compression(compressionCfg));
+app.use('/static', express.static(path.join(__dirname, 'public')));
+
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/rhc'));
 
