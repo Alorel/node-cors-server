@@ -2,6 +2,8 @@ A CORS proxy ready to be deployed to Redhat Cloud, Heroku or whatever it is you 
 
 Built with Node 7, might work with older versions.
 
+[![NPM stats](https://nodei.co/npm/express-cors-proxy-server.png?downloads=false&downloadRank=false&stars=false)](https://www.npmjs.com/package/express-cors-proxy-server)
+
 # Demo
 
 https://corsproxy-alorel.rhcloud.com/
