@@ -6,6 +6,12 @@ Built with Node 7, might work with older versions.
 
 https://corsproxy-alorel.rhcloud.com/
 
+# Safeguards
+
+- Non-GET requests are blocked; HTTP 400 is returned.
+- Content-Length filtering
+- Content-Type filtering
+
 # Configuration
 
 Edit **config.json**.
