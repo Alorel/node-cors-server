@@ -13,7 +13,7 @@ block content
           input#url(type!= 'url', 'data-bind' != 'textInput: inurl')
         div
           span(style={display: 'block', 'font-weight': 'bold'})!= 'CORS this instead!'
-          a('data-bind' != 'attr: {href: outfull}, visible: urlvalid', target != '_blank')
+          a('data-bind' != 'attr: {href: outfull}, visible: urlvalid', target != '_blank', rel!='nofollow')
             span('data-bind' != 'text: outbase')
             span(style={'font-weight': 'bold'}, 'data-bind' != 'text: outencoded')
           .ui.negative.message('data-bind' != 'visible: !urlvalid()', style={display: 'none'})!= 'Invalid URL'
