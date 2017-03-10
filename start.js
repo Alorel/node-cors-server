@@ -89,7 +89,7 @@ if (cluster.isMaster) {
             ? 'pipe ' + addr
             : 'port ' + addr.port;
 
-        debug('Listening on ' + bind);
+        console.log('Listening on ' + bind);
     };
 
     server.on('error', onError);

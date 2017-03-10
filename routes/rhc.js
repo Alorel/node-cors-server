@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const sysInfo = require('../utils/sys-info');
+const sysInfo = require('../lib/sys-info');
 
 const info = (type, res) => {
     res.header('Cache-Control', 'no-cache, no-store');

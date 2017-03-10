@@ -1,0 +1,35 @@
+{
+  "cache_max_age": 86400000,
+  "cache_size": 10000,
+  "headers": {
+    "cors": {
+      "Access-Control-Allow-Methods": "GET",
+      "Access-Control-Allow-Origin": "*"
+    },
+    "global": {
+      "Access-Control-Allow-Credentials": "false",
+      "Content-Security-Policy": "frame-ancestors 'none'",
+      "Referrer-Policy": "no-referrer",
+      "X-Content-Type-Options": "nosniff",
+      "X-DNS-Prefetch-Control": "off",
+      "X-Download-Options": "noopen",
+      "X-Frame-Options": "deny",
+      "X-XSS-Protection": "1; mode=block",
+      "X-Powered-By": "Trump's tiny cocktail sausage fingers"
+    }
+  },
+  "ctypes": {
+    "allow": [
+      "text",
+      "javascript",
+      "json",
+      "xml"
+    ],
+    "deny": [
+      "image",
+      "video",
+      "audio"
+    ]
+  },
+  "max_content_length": 1048576
+}
