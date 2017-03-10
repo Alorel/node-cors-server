@@ -14,4 +14,12 @@ html
       .row
         h1.column.ui.header= title
       block content
+      footer.row
+        small Hopefully this goes without saying, but don't use this proxy for anything dodgy. If you're a site admin
+          |  investigating some suspicious traffic, note that the site owner is not necessarily the one responsible
+          |  for them.
+        small
+          span!= 'Grab your own CORS proxy '
+          a(href!='https://github.com/Alorel/node-cors-server' target='_blank')!= 'here'
+          span!= '.'
       block scripts

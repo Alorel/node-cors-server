@@ -1,3 +1,7 @@
 .underdot {
     border-bottom: 1px dotted;
 }
+
+body > div > footer > small {
+    display: block;
+}
