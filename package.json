@@ -1,12 +1,19 @@
 {
-  "name": "openshift-cartridge-nodejs-template",
-  "version": "1.0.1",
-  "description": "Custom Node.js cartridge for OpenShift - sample application",
+  "name": "cors",
+  "version": "0.0.0",
+  "description": "A cors proxy",
   "private": true,
   "main": "start.js",
   "scripts": {
     "start": "node --use_strict start.js"
   },
-  "author": "Ionut-Cristian Florescu <ionut.florescu@gmail.com>",
-  "license": "ISC"
+  "author": "Alorel",
+  "dependencies": {
+    "debug": "^2.6",
+    "express": "^4.0",
+    "morgan": "^1.0",
+    "pug": "^2.0.0-beta9",
+    "request": "^2.0"
+  },
+  "license": "MIT"
 }
