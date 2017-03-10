@@ -7,14 +7,14 @@ const info = (type, res) => {
     res.json(sysInfo[type]());
 };
 
-router.get('/health', (req, res, next) => {
+router.get('/health', (req, res) => {
     res.write("1");
     res.end();
 });
-router.get('/info/gen', (req, res, next) => {
+router.get('/info/gen', (req, res) => {
     info('gen', res);
 });
-router.get('/info/poll', (req, res, next) => {
+router.get('/info/poll', (req, res) => {
     info('poll', res);
 });
 

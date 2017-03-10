@@ -20,6 +20,8 @@
   "components": [
     "site",
     "header",
+    "list",
+    "table",
     "container",
     "form",
     "grid",

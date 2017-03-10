@@ -20,15 +20,15 @@
   },
   "ctypes": {
     "allow": [
-      "text",
       "javascript",
       "json",
+      "text",
       "xml"
     ],
     "deny": [
+      "audio",
       "image",
-      "video",
-      "audio"
+      "video"
     ]
   },
   "max_content_length": 1048576

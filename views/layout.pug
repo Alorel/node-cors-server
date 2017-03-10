@@ -6,8 +6,9 @@ html
     meta(content!= 'follow, index, all', name!='robots')
     meta(name != 'viewport', content!='width=device-width, initial-scale=1')
     title= title
-    link(rel!='stylesheet', href!='/static/semantic.min.css')
-    link(rel!='shortcut icon' type!='image/x-icon' href!= '/static/favicon.ico')
+    link(rel!='stylesheet', href!='/semantic.min.css')
+    link(rel!='shortcut icon' href!= '/favicon.ico')
+    block css
   body
     .ui.grid.container
       .row

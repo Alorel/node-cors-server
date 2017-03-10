@@ -17,7 +17,7 @@ app.use(logger('dev'));
 app.use(require('./lib/deny-non-get'));
 app.use(require('./lib/headers').middleware);
 app.use(compression(compressionCfg));
-app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use('/', express.static(path.join(__dirname, 'public')));
 
 app.use('/', require('./routes/index'));
 app.use('/', require('./routes/rhc'));

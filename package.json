@@ -5,7 +5,8 @@
   "private": true,
   "main": "start.js",
   "scripts": {
-    "start": "node --use_strict start.js"
+    "start": "node --use_strict start.js",
+    "rebuild-semantic": "cd semantic && gulp build && cd .. && cp semantic/dist/semantic.min.css public/semantic.min.css"
   },
   "author": "Alorel",
   "dependencies": {
@@ -15,6 +16,7 @@
     "express": "^4.0",
     "lru-cache": "^4.0.2",
     "morgan": "^1.0",
+    "ms-util": "^0.1.1",
     "pug": "^2.0.0-beta9",
     "request": "^2.0",
     "request-promise": "^1.0"
