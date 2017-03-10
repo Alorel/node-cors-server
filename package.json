@@ -1,14 +1,32 @@
 {
-  "name": "cors",
-  "version": "0.0.0",
-  "description": "A cors proxy",
-  "private": true,
+  "name": "express-cors-proxy-server",
+  "version": "0.1.0",
+  "description": "A CORS server implemented in Express",
+  "private": false,
   "main": "start.js",
   "scripts": {
     "start": "node --use_strict start.js",
     "rebuild-semantic": "cd semantic && gulp build && cd .. && cp semantic/dist/semantic.min.css public/semantic.min.css"
   },
-  "author": "Alorel",
+  "keywords": [
+    "proxy",
+    "proxy-server",
+    "cors",
+    "cors-proxy",
+    "express"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alorel/node-cors-server.git"
+  },
+  "engines": {
+    "node": ">=6.0"
+  },
+  "author": "Alorel <a.molcanovas@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/Alorel/node-cors-server/issues"
+  },
+  "homepage": "https://github.com/Alorel/node-cors-server",
   "dependencies": {
     "bluebird": "^3.5",
     "compression": "^1.6",
@@ -24,5 +42,5 @@
   "devDependencies": {
     "semantic-ui": "^2.0.8"
   },
-  "license": "MIT"
+  "license": "Apache-2.0"
 }
