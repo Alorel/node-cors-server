@@ -57,14 +57,22 @@ block content
         tbody
           tr
             td Uptime
-            td('data-bind'= 'text: uptime')
+            td(colspan=3)= uptime
           tr
             td Free memory
-            td('data-bind'= "text: mem")
+            td(colspan=3)= mem
+          tr
+            td(rowspan=2) CORS requests
+            td.bold Accepted
+            td.bold Rejected
+            td.bold Total
+          tr
+            td= stats.allowed.toLocaleString()
+            td= stats.rejected.toLocaleString()
+            td= stats.total.toLocaleString()
 
 
 
 block scripts
   script(src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js')
-  script(src='https://cdn.rawgit.com/Alorel/node-ms-util/0.1.1/dist/ms-util.min.js')
   script(src='/index.js', async)

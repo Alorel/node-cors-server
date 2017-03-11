@@ -7,6 +7,8 @@ const NOTFOUND = require('dns').NOTFOUND;
 const config = require('../config.json');
 const msu = require('ms-util');
 const Promise = require('bluebird');
+const sysinfo = require('../lib/sys-info');
+const stats = require('../lib/stats');
 
 const indexVars = {
     title: 'CORS Proxy',
@@ -28,8 +30,10 @@ const handleCors = (req, res) => {
     Promise.join(head.requestAndCheck(url), addHeaders(res, config.headers.cors), r => {
         res.header('X-HEAD-Cached', r.cache.toString());
         if (r.result.ok) {
+            stats.incrementAllowed();
             setImmediate(forward);
         } else {
+            stats.incrementRejected();
             res.status(400);
             res.write(r.result.err);
             res.end();
@@ -51,7 +55,20 @@ router.get('/', (req, res) => {
     if ('url' in req.query) {
         setImmediate(handleCors, req, res);
     } else {
-        res.render('index', indexVars);
+        const poll = sysinfo.poll();
+        const vars = {};
+        for (let v of poll) {
+            if (v.name === 'Uptime') {
+                vars.uptime = msu.toWords(parseFloat(v.value.substr(0, v.value.length - 1)) * 10000);
+            } else {
+                vars.mem = v.value;
+            }
+        }
+
+        stats.getBoth().then(stats => {
+            vars.stats = stats;
+            res.render('index', Object.assign(vars, indexVars));
+        });
     }
 });
 
