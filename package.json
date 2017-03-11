@@ -36,7 +36,6 @@
     "lru-cache": "^4.0",
     "morgan": "^1.0",
     "ms-util": "^0.1",
-    "node-persist": "^2.0.10",
     "pug": "^2.0.0-beta9",
     "request": "^2.0",
     "request-promise": "^1.0"

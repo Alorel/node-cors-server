@@ -56,19 +56,25 @@ block content
       table.ui.celled.table
         tbody
           tr
-            td Uptime
-            td(colspan=3)= uptime
+            td System Uptime
+            td(colspan=3)= system_uptime
+          tr
+            td Cluster ID
+            td(colspan=3)= cluster
+          tr
+            td Cluster age
+            td(colspan=3)= stats.uptime_str
           tr
             td Free memory
             td(colspan=3)= mem
           tr
-            td(rowspan=2) CORS requests
+            td(rowspan=2) CORS requests on this cluster since restart
             td.bold Accepted
             td.bold Rejected
             td.bold Total
           tr
-            td= stats.allowed.toLocaleString()
-            td= stats.rejected.toLocaleString()
+            td #{stats.approved.toLocaleString()} (#{stats.approvePCT.toLocaleString()} %)
+            td #{stats.rejected.toLocaleString()} (#{stats.rejectPCT.toLocaleString()} %)
             td= stats.total.toLocaleString()
 
 

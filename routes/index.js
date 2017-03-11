@@ -5,7 +5,7 @@ const addHeaders = require('../lib/headers').add;
 const head = require('../lib/validate-request');
 const NOTFOUND = require('dns').NOTFOUND;
 const config = require('../config.json');
-const msu = require('ms-util');
+const msu = require('ms-util').toWords;
 const Promise = require('bluebird');
 const sysinfo = require('../lib/sys-info');
 const stats = require('../lib/stats');
@@ -16,8 +16,9 @@ const indexVars = {
     denied: config.ctypes.deny.sort(),
     methods: config.headers.cors["Access-Control-Allow-Methods"],
     maxlength: config.max_content_length.toLocaleString() + ' bytes',
-    head_cache_age: msu.toWords(config.cache_max_age),
-    cache_size: config.cache_size.toLocaleString()
+    head_cache_age: msu(config.cache_max_age),
+    cache_size: config.cache_size.toLocaleString(),
+    cluster: require('../lib/cluster-id').get()
 };
 
 const handleCors = (req, res) => {
@@ -30,10 +31,10 @@ const handleCors = (req, res) => {
     Promise.join(head.requestAndCheck(url), addHeaders(res, config.headers.cors), r => {
         res.header('X-HEAD-Cached', r.cache.toString());
         if (r.result.ok) {
-            stats.incrementAllowed();
+            stats.approved++;
             setImmediate(forward);
         } else {
-            stats.incrementRejected();
+            stats.rejected++;
             res.status(400);
             res.write(r.result.err);
             res.end();
@@ -51,24 +52,19 @@ const handleCors = (req, res) => {
     });
 };
 
+router.get('/stats', (req, res) => {
+    res.json(stats.stats);
+});
+
 router.get('/', (req, res) => {
     if ('url' in req.query) {
         setImmediate(handleCors, req, res);
     } else {
-        const poll = sysinfo.poll();
-        const vars = {};
-        for (let v of poll) {
-            if (v.name === 'Uptime') {
-                vars.uptime = msu.toWords(parseFloat(v.value.substr(0, v.value.length - 1)) * 10000);
-            } else {
-                vars.mem = v.value;
-            }
-        }
-
-        stats.getBoth().then(stats => {
-            vars.stats = stats;
-            res.render('index', Object.assign(vars, indexVars));
-        });
+        res.render('index', Object.assign({
+            stats: stats.stats,
+            system_uptime: msu(sysinfo.uptime * 1000),
+            mem: sysinfo.freemem
+        }, indexVars));
     }
 });
 

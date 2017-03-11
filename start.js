@@ -6,22 +6,23 @@ const cluster = require('cluster'),
     production = process.env.NODE_ENV == 'production';
 
 let stopping = false;
+let numWorkers = 0;
 
 cluster.on('disconnect', function () {
-    if (production) {
-        if (!stopping) {
-            cluster.fork();
-        }
-    } else {
-        process.exit(1);
+    if (!stopping) {
+        cluster.fork({
+            cluster_id: ++numWorkers
+        });
     }
 });
 
 if (cluster.isMaster) {
-    const workerCount = process.env.NODE_CLUSTER_WORKERS || 4;
+    const workerCount = process.env.NODE_CLUSTER_WORKERS || Math.max(4, require('os').cpus().length);
     console.log(`Starting ${workerCount} workers...`);
     for (let i = 0; i < workerCount; i++) {
-        cluster.fork();
+        cluster.fork({
+            cluster_id: ++numWorkers
+        });
     }
     if (production) {
         stopSignals.forEach(function (signal) {
@@ -36,6 +37,8 @@ if (cluster.isMaster) {
         });
     }
 } else {
+    const clusterID = require('./lib/cluster-id');
+    clusterID.register(process.env.cluster_id);
     const app = require('./app');
     const debug = require('debug')('cors-proxy:server');
 
@@ -89,7 +92,7 @@ if (cluster.isMaster) {
             ? 'pipe ' + addr
             : 'port ' + addr.port;
 
-        console.log('Listening on ' + bind);
+        console.log(`Cluster #${clusterID.get()} (PID ${process.pid}) listening on ${bind}`);
     };
 
     server.on('error', onError);
