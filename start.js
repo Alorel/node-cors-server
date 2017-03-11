@@ -7,7 +7,7 @@ const cluster = require('cluster'),
 
 let stopping = false;
 
-cluster.on('disconnect', function (worker) {
+cluster.on('disconnect', worker => {
     if (production) {
         if (!stopping) {
             cluster.fork();
