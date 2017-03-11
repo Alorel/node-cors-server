@@ -4,6 +4,21 @@ Built with Node 7, might work with older versions.
 
 [![NPM stats](https://nodei.co/npm/express-cors-proxy-server.png?downloads=false&downloadRank=false&stars=false)](https://www.npmjs.com/package/express-cors-proxy-server)
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+- [Demo](#demo)
+- [Safeguards](#safeguards)
+- [Status endpoints](#status-endpoints)
+  - [/stats](#stats)
+  - [/info/gen](#infogen)
+  - [/info/poll](#infopoll)
+  - [/health](#health)
+- [Configuration](#configuration)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Demo
 
 https://corsproxy-alorel.rhcloud.com/
@@ -60,6 +75,10 @@ Returns more server info. Can be disabled.
     {"name":"Uptime","value":"64834.9022395s"}
 ]
 ```
+
+## /health
+
+Responds with HTTP 200. Can't be disabled. Required for Redhat Cloud.
 
 # Configuration
 
