@@ -18,7 +18,7 @@ const indexVars = {
     maxlength: config.max_content_length.toLocaleString() + ' bytes',
     head_cache_age: msu(config.cache_max_age),
     cache_size: config.cache_size.toLocaleString(),
-    cluster: require('../lib/cluster-id').get()
+    cluster: require('../lib/cluster-id')
 };
 
 const handleCors = (req, res) => {

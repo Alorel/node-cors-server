@@ -37,8 +37,6 @@ if (cluster.isMaster) {
         });
     }
 } else {
-    const clusterID = require('./lib/cluster-id');
-    clusterID.register(process.env.cluster_id);
     const app = require('./app');
     const debug = require('debug')('cors-proxy:server');
 
@@ -92,7 +90,7 @@ if (cluster.isMaster) {
             ? 'pipe ' + addr
             : 'port ' + addr.port;
 
-        console.log(`Cluster #${clusterID.get()} (PID ${process.pid}) listening on ${bind}`);
+        console.log(`Cluster ${require('./lib/cluster-id')} (PID ${process.pid}) listening on ${bind}`);
     };
 
     server.on('error', onError);
