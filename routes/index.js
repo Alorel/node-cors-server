@@ -6,6 +6,7 @@ const head = require('../lib/validate-request');
 const NOTFOUND = require('dns').NOTFOUND;
 const config = require('../config.json');
 const msu = require('ms-util');
+const Promise = require('bluebird');
 
 const indexVars = {
     title: 'CORS Proxy',
@@ -18,17 +19,16 @@ const indexVars = {
 };
 
 const handleCors = (req, res) => {
-    addHeaders(res, 'cors');
     const url = req.query.url;
 
     const forward = () => {
         req.pipe(request(url)).pipe(res);
     };
 
-    head.requestAndCheck(url).then(r => {
+    Promise.join(head.requestAndCheck(url), addHeaders(res, config.headers.cors), r => {
         res.header('X-HEAD-Cached', r.cache.toString());
         if (r.result.ok) {
-            forward();
+            setImmediate(forward);
         } else {
             res.status(400);
             res.write(r.result.err);
@@ -43,13 +43,13 @@ const handleCors = (req, res) => {
             }
         }
 
-        forward();
+        setImmediate(forward);
     });
 };
 
 router.get('/', (req, res) => {
     if ('url' in req.query) {
-        handleCors(req, res);
+        setImmediate(handleCors, req, res);
     } else {
         res.render('index', indexVars);
     }

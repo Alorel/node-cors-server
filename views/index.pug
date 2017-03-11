@@ -1,59 +1,70 @@
 extends layout
 
 block css
-  link(rel!='stylesheet', href='/balloon.min.css')
-  link(rel!='stylesheet', href='/site.css')
+  link(rel='stylesheet', href='/balloon.min.css')
+  link(rel='stylesheet', href='/site.css')
 
 block content
   .row
     .column
       .ui.form
         .field
-          label(for!= 'url')!= 'URL you want to CORS:'
-          input#url(type!= 'url', 'data-bind' != 'textInput: inurl')
+          label(for= 'url') URL you want to CORS:
+          input#url(type= 'url', 'data-bind' = 'textInput: inurl')
         div
-          span(style={display: 'block', 'font-weight': 'bold'})!= 'CORS this instead!'
-          a('data-bind' != 'attr: {href: outfull}, visible: urlvalid', target != '_blank', rel!='nofollow')
-            span('data-bind' != 'text: outbase')
-            span(style={'font-weight': 'bold'}, 'data-bind' != 'text: outencoded')
-          .ui.negative.message('data-bind' != 'visible: !urlvalid()', style={display: 'none'})!= 'Invalid URL'
+          span(style={display: 'block', 'font-weight': 'bold'}) CORS this instead!
+          input#out(type= 'url', 'data-bind' = 'value: outfull, visible: urlvalid', readonly)
+          .ui.negative.message('data-bind' = 'visible: !urlvalid()', style = {display: 'none'}) Invalid URL
   .row
-    h2.column.ui.header.centered!= 'Proxy Spec'
+    h2.column.ui.header.centered Proxy Spec
   .row
     .column.four.wide
       h3.ui.header
-        span.underdot('data-balloon'!="If the content type contains any of these substrings, the request will be rejected")!= 'Blocked Content Types'
+        span.underdot('data-balloon' = "If the content type contains any of these substrings, the request will be rejected") Blocked Content Types
       .ui.list
         each val in denied
-          .item=val
+          .item= val
     .column.four.wide
       h3.ui.header
-        span.underdot('data-balloon'!="If the content type doesn't match any of the deny rules and contains one of these substrings, the CORS request will be allowed")!= 'Allowed Content Types'
+        span.underdot('data-balloon' = "If the content type doesn't match any of the deny rules and contains one of these substrings, the CORS request will be allowed") Allowed Content Types
       .ui.list
         each val in allowed
-          .item=val
+          .item= val
     .column.six.wide
-      h3.ui.header!= 'Other Specs'
+      h3.ui.header Other Specs
       table.ui.celled.table
         tbody
           tr
-            td!= 'Allowed HTTP methods'
+            td Allowed HTTP methods
             td= methods
           tr
             td
-              span.underdot('data-balloon'!='Requests will be rejected if the content length exceeds this value')!= 'Maximum Content length'
+              span.underdot('data-balloon' = 'Requests will be rejected if the content length exceeds this value') Maximum Content length
             td= maxlength
           tr
             td
-              span.underdot('data-balloon'!='Every request results in a HEAD pre-check of the target resource to perform filtering. This is how long these requests are cached for.')!='HEAD cache age limit'
+              span.underdot('data-balloon' = 'Every request results in a HEAD pre-check of the target resource to perform filtering. This is how long these requests are cached for.') HEAD cache age limit
             td= head_cache_age
           tr
             td
-              span.underdot('data-balloon'!='Maximum number of HEAD requests in cache before LRU eviction takes place')!='HEAD cache size'
+              span.underdot('data-balloon' = 'Maximum number of HEAD requests in cache before LRU eviction takes place') HEAD cache size
             td= cache_size
+  .row
+    h2.column.ui.header.centered Server stats
+  .row
+    .column
+      table.ui.celled.table
+        tbody
+          tr
+            td Uptime
+            td('data-bind'= 'text: uptime')
+          tr
+            td Free memory
+            td('data-bind'= "text: mem")
 
 
 
 block scripts
-  script(src!='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js')
-  script(src!='/index.js', async)
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.1/knockout-min.js')
+  script(src='https://cdn.rawgit.com/Alorel/node-ms-util/0.1.1/dist/ms-util.min.js')
+  script(src='/index.js', async)

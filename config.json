@@ -8,7 +8,7 @@
     },
     "global": {
       "Access-Control-Allow-Credentials": "false",
-      "Content-Security-Policy": "frame-ancestors 'none'",
+      "Content-Security-Policy": "frame-ancestors 'none'; default-src 'none'; base-uri 'self'; style-src 'self' fonts.googleapis.com 'unsafe-inline'; font-src 'self' fonts.gstatic.com; img-src 'self'; script-src 'self' cdnjs.cloudflare.com cdn.rawgit.com; connect-src 'self'",
       "Referrer-Policy": "no-referrer",
       "X-Content-Type-Options": "nosniff",
       "X-DNS-Prefetch-Control": "off",

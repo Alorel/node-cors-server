@@ -1,4 +1,4 @@
-A CORS proxy ready to be deployed to Redhat Cloud, Heroku or whatever it is you use.
+A CORS proxy server ready to be deployed to Redhat Cloud, Heroku or whatever it is you use.
 
 Built with Node 7, might work with older versions.
 
@@ -10,7 +10,7 @@ https://corsproxy-alorel.rhcloud.com/
 
 # Safeguards
 
-- Non-GET requests are blocked; HTTP 400 is returned.
+- Non-GET requests are blocked; HTTP 405 is returned.
 - Content-Length filtering
 - Content-Type filtering
 
