@@ -68,9 +68,10 @@ block content
           tr
             td Cluster age
             td(colspan=3)= stats.uptime_str
-          tr
-            td Free memory
-            td(colspan=3)= mem
+          if mem
+            tr
+              td Free memory
+              td(colspan=3)= mem
           tr
             td(rowspan=2) CORS requests on this cluster since restart
             td.bold Accepted

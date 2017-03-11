@@ -14,6 +14,53 @@ https://corsproxy-alorel.rhcloud.com/
 - Content-Length filtering
 - Content-Type filtering
 
+# Status endpoints
+## /stats
+
+Returns a random cluster's stats, for example:
+
+```json
+{
+    "cluster_id": "7cec873c-d2bb-495a-bb06-48568f2423c4",
+    "rejected": 0,
+    "approved": 0,
+    "uptime": 16472,
+    "uptime_str": "16sec",
+    "total": 0,
+    "rejectPCT": 0,
+    "approvePCT": 0
+}
+```
+
+Can be disabled.
+
+## /info/gen
+
+Returns some OS info. Can be disabled.
+
+```json
+[
+    {"name":"Node.js Version","value":"7.4.0"},
+    {"name":"NPM Version","value":"4.1.2\n"},
+    {"name":"OS Type","value":"Windows_NT"},
+    {"name":"OS Platform","value":"win32"},
+    {"name":"OS Architecture","value":"x64"},
+    {"name":"OS Release","value":"6.1.7601"},
+    {"name":"CPU Cores","value":8}
+]
+```
+
+## /info/poll
+
+Returns more server info. Can be disabled.
+
+```json
+[
+    {"name":"Free Memory","value":"783MB"},
+    {"name":"Uptime","value":"64834.9022395s"}
+]
+```
+
 # Configuration
 
 Edit **config.json**.
@@ -23,6 +70,13 @@ Edit **config.json**.
     content length. This is how long these requests are cached for.
   - cache_size
     - Maximum number of HEAD requests in cache.
+  - endpoints
+    - stats
+      - enable/disable the */stats* endpoint
+    - gen
+      - enable/disable the */info/gen* endpoint
+    - poll
+      - enable/disable the */info/poll* endpoint
   - headers
     - cors
       - List of headers to append to CORS requests

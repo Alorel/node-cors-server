@@ -52,9 +52,13 @@ const handleCors = (req, res) => {
     });
 };
 
-router.get('/stats', (req, res) => {
-    res.json(stats.stats);
-});
+if (config.endpoints.stats) {
+    router.get('/stats', (req, res) => {
+        res.json(Object.assign({
+            cluster_id: indexVars.cluster
+        }, stats.stats));
+    });
+}
 
 router.get('/', (req, res) => {
     if ('url' in req.query) {
@@ -63,7 +67,7 @@ router.get('/', (req, res) => {
         res.render('index', Object.assign({
             stats: stats.stats,
             system_uptime: msu(sysinfo.uptime * 1000),
-            mem: sysinfo.freemem
+            mem: config.endpoints.poll ? sysinfo.freemem : false
         }, indexVars));
     }
 });

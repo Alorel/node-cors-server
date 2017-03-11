@@ -1,6 +1,11 @@
 {
   "cache_max_age": 86400000,
   "cache_size": 10000,
+  "endpoints": {
+    "stats": true,
+    "gen": true,
+    "poll": true
+  },
   "headers": {
     "cors": {
       "Access-Control-Allow-Methods": "GET",
