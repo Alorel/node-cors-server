@@ -8,14 +8,17 @@
     model.urlvalid = ko.pureComputed(function () {
         return url_regex.test(model.inurl());
     });
-    model.outencoded = ko.pureComputed(function () {
-        return encodeURIComponent(model.inurl());
+
+    var outfull = ko.pureComputed(function () {
+        return location.protocol + "//" + location.host + "/?url=" + encodeURIComponent(model.inurl());
     });
-    model.outfull = ko.pureComputed(function () {
-        return location.protocol + "//" + location.host + "/?url=" + model.outencoded();
+
+    model.outurl = ko.pureComputed(function () {
+        return model.urlvalid() ? outfull() : 'Invalid URL!';
     });
 
     ko.applyBindings(model);
+
 
     document.getElementById("out").addEventListener('click', function () {
         this.select();

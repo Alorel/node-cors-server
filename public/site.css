@@ -9,3 +9,49 @@
 body > div > footer > small {
     display: block;
 }
+
+body {
+    background-clip: border-box;
+    background-origin: padding-box;
+    background-size: auto;
+    background: #222 url(/bg.png) repeat scroll left top;
+}
+
+body, .ui.header, .ui.form .field > label, .ui.table {
+    color: #c0c0c0;
+}
+
+.fullwidth {
+    width: 100%
+}
+
+.block {
+    display: block !important;
+}
+
+.ui.input:not(.error) > input {
+    background: #181818 !important;
+    border-color: #343434 !important;
+    color: #c0c0c0 !important;
+}
+
+::selection {
+    color: #222;
+    background-color: #c0c0c0;
+}
+
+input::selection {
+    background-color: #c0c0c0;
+}
+
+.ui.table, .ui.table > * > tr > * {
+    border-color: #c0c0c0 !important;
+}
+
+.container, .ui.table {
+    background-color: #181818;
+}
+
+.container {
+    padding: 5px !important;
+}

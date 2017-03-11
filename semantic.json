@@ -23,10 +23,9 @@
     "list",
     "table",
     "container",
-    "form",
+    "input",
     "grid",
-    "message",
-    "form"
+    "message"
   ],
   "version": "2.0.8"
 }

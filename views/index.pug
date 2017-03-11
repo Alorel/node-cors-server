@@ -2,19 +2,23 @@ extends layout
 
 block css
   link(rel='stylesheet', href='/balloon.min.css')
-  link(rel='stylesheet', href='/site.css')
 
 block content
   .row
-    .column
-      .ui.form
-        .field
-          label(for= 'url') URL you want to CORS:
-          input#url(type= 'url', 'data-bind' = 'textInput: inurl')
-        div
-          span(style={display: 'block', 'font-weight': 'bold'}) CORS this instead!
-          input#out(type= 'url', 'data-bind' = 'value: outfull, visible: urlvalid', readonly)
-          .ui.negative.message('data-bind' = 'visible: !urlvalid()', style = {display: 'none'}) Invalid URL
+    .column.six.wide
+      .ui.list
+        .item
+          label.bold(for= 'url') URL you want to CORS:
+        .item
+          .ui.input.fluid('data-bind' = 'css: {error: !urlvalid()}')
+            input#url(type= 'url', 'data-bind' = 'textInput: inurl', placeholder='https://www.example.com')
+    .column.eight.wide
+      .ui.list
+        .item.visfade.bold('data-bind'= "style:{visibility: urlvalid() ? 'visible' : 'hidden'}") CORS this instead!
+        .item
+          .ui.input.fluid('data-bind' = 'css: {error: !urlvalid()}')
+            input#out(type= 'url', 'data-bind' = 'value: outurl', readonly)
+        //.ui.negative.message('data-bind' = 'visible: !urlvalid()', style = {display: 'none'}) Invalid URL
   .row
     h2.column.ui.header.centered Proxy Spec
   .row
