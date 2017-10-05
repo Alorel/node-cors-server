@@ -8,6 +8,8 @@ cache:
     - ~/.npm
     - ~/.nvm
 
+install: echo 0
+
 script:
   - echo 0
   - npm prune
