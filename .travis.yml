@@ -9,7 +9,7 @@ cache:
     - ~/.nvm
 
 script:
-  - echo 1
+  - echo 0
   - npm prune
 
 notifications:
