@@ -21,6 +21,8 @@ Built with Node 7, might work with older versions.
 
 # Demo
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/Alorel/node-cors-server.svg)](https://greenkeeper.io/)
+
 https://corsproxy-alorel.rhcloud.com/
 
 # Safeguards
