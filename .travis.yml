@@ -1,0 +1,17 @@
+language: node_js
+node_js:
+  - 8
+
+cache:
+  directories:
+    - node_modules
+    - ~/.npm
+    - ~/.nvm
+
+script:
+  - echo 1
+  - npm prune
+
+notifications:
+  on_success: change
+  on_failure: always
