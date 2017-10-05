@@ -2,18 +2,5 @@ language: node_js
 node_js:
   - 8
 
-cache:
-  directories:
-    - node_modules
-    - ~/.npm
-    - ~/.nvm
-
 install: echo 0
-
-script:
-  - echo 0
-  - npm prune
-
-notifications:
-  on_success: change
-  on_failure: always
+script: echo 0
