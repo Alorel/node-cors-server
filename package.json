@@ -15,6 +15,7 @@
     "express": "^4.16",
     "lodash": "^4.17",
     "request": "^2.83",
+    "throng": "^4.0.0",
     "yamljs": "^0.3.0"
   },
   "repository": {
