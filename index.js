@@ -1,14 +1,9 @@
 const express = require('express');
 const app = express();
-const whitelist = require('./whitelist.json');
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use('*', (req, res, next) => {
-  console.log(`Origin: ${req.header('origin')}`);
-  console.log(`Referer: ${req.header('referer')}`);
-  setImmediate(next);
-});
+app.use('*', require('./handlers/filter-origin'));
 
 app.get('/', (req, res) => {
   res.end('');

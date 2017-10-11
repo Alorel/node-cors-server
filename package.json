@@ -1,7 +1,7 @@
 {
-  "name": "node-js-getting-started",
-  "version": "0.2.6",
-  "description": "A sample Node.js app using Express 4",
+  "name": "heroku-cors-proxy",
+  "version": "0.1.0",
+  "description": "A CORS-enabled proxy",
   "engines": {
     "node": "^8.6",
     "npm": "^5.4"
@@ -11,16 +11,21 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "express": "^4.16.2"
+    "async.each": "^0.5.2",
+    "express": "^4.16.2",
+    "lodash": "^4.17.4",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "yamljs": "^0.3.0"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/heroku/node-js-getting-started"
+    "url": "https://github.com/Alorel/node-cors-server.git"
   },
   "keywords": [
-    "node",
     "heroku",
-    "express"
+    "cors",
+    "proxy"
   ],
   "license": "MIT"
 }

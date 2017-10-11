@@ -1,0 +1,15 @@
+whitelist:
+  origins:
+    - alorel.github.io
+  targets:
+    - github.com
+
+headers:
+  Access-Control-Allow-Origin: "*"
+  Access-Control-Allow-Methods: GET
+  Access-Control-Allow-Credentials: "false"
+  X-Content-Type-Options: nosniff
+  X-Download-Options: noopen
+  X-Frame-Options: deny
+  X-XSS-Protection: 1; mode=block
+  X-Powered-By: Trump's tiny cocktail sausage fingers
