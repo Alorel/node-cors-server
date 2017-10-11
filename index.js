@@ -1,9 +1,10 @@
 const express = require('express');
 const app = express();
+const request = require('request');
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(require('shrink-ray')({
+app.get('/', require('shrink-ray')({
     threshold: 1,
     zlib: {
         level: 9
@@ -12,12 +13,14 @@ app.use(require('shrink-ray')({
         quality: 11
     }
 }));
-app.use('*', require('./handlers/set-headers'));
-app.use('*', require('./handlers/filter-origin'));
-app.use('*', require('./handlers/filter-querystring'));
+app.get('/', require('./handlers/set-headers'));
+app.get('/', require('./handlers/filter-origin'));
+app.get('/', require('./handlers/filter-querystring'));
+app.get('/', require('./handlers/filter-target'));
 
 app.get('/', (req, res) => {
-  res.end('');
+  req.pipe(request(req.query.url))
+      .pipe(res);
 });
 
 app.listen(app.get('port'), function() {

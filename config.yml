@@ -8,6 +8,7 @@ headers:
   Access-Control-Allow-Origin: "*"
   Access-Control-Allow-Methods: GET
   Access-Control-Allow-Credentials: "false"
+  Cache-Control: no-cache, no-store
   X-Content-Type-Options: nosniff
   X-Download-Options: noopen
   X-Frame-Options: deny
