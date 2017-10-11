@@ -1,1 +1,1 @@
-web: node --use_strict start.js
+web: node --debug=5858 index.js

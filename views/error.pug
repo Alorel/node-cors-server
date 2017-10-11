@@ -1,9 +1,0 @@
-extends layout
-
-block content
-  .row
-    .column.ui.negative.message
-      h1.ui.header= error.status
-      span= message
-  .row
-    pre.column #{error.stack}

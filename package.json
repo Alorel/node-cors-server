@@ -1,48 +1,31 @@
 {
-  "name": "express-cors-proxy-server",
-  "version": "0.2.0",
-  "description": "A CORS server implemented in Express",
-  "private": false,
-  "main": "start.js",
-  "scripts": {
-    "start": "node --use_strict start.js",
-    "rebuild-semantic": "cd semantic && gulp clean && gulp build && cd .. && cp semantic/dist/semantic.min.css public/semantic.min.css && cp semantic/dist/semantic.min.js public/semantic.min.js"
-  },
-  "keywords": [
-    "proxy",
-    "proxy-server",
-    "cors",
-    "cors-proxy",
-    "express"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Alorel/node-cors-server.git"
-  },
+  "name": "node-js-getting-started",
+  "version": "0.2.6",
+  "description": "A sample Node.js app using Express 4",
   "engines": {
-    "node": ">=6.0"
+    "node": "^8.6"
   },
-  "author": "Alorel <a.molcanovas@gmail.com>",
-  "bugs": {
-    "url": "https://github.com/Alorel/node-cors-server/issues"
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node test.js"
   },
-  "homepage": "https://github.com/Alorel/node-cors-server",
   "dependencies": {
-    "async.eachof": "^0.5",
-    "bluebird": "^3.5",
-    "compression": "^1.6",
-    "debug": "^3.1.0",
-    "express": "^4.0",
-    "lru-cache": "^4.0",
-    "morgan": "^1.0",
-    "ms-util": "^0.1",
-    "pug": "^2.0.0-beta9",
-    "request": "^2.0",
-    "request-promise": "^4.2.2",
-    "uuid": "^3.0"
+    "ejs": "2.5.6",
+    "express": "4.15.2"
   },
   "devDependencies": {
-    "semantic-ui": "^2.0.8"
+    "request": "^2.81.0",
+    "tape": "^4.7.0"
   },
-  "license": "Apache-2.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heroku/node-js-getting-started"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
 }
