@@ -1,16 +1,17 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
+const whitelist = require('./whitelist.json');
 
 app.set('port', (process.env.PORT || 5000));
 
-app.use(express.static(__dirname + '/public'));
+app.use('*', (req, res, next) => {
+  console.log(`Origin: ${req.header('origin')}`);
+  console.log(`Referer: ${req.header('referer')}`);
+  setImmediate(next);
+});
 
-// views is directory for all template files
-app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
-
-app.get('/', function(request, response) {
-  response.render('pages/index');
+app.get('/', (req, res) => {
+  res.end('');
 });
 
 app.listen(app.get('port'), function() {
