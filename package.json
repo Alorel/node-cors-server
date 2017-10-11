@@ -3,20 +3,16 @@
   "version": "0.2.6",
   "description": "A sample Node.js app using Express 4",
   "engines": {
-    "node": "^8.6"
+    "node": "^8.6",
+    "npm": "^5.4"
   },
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "test": "node test.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "ejs": "2.5.6",
     "express": "4.15.2"
-  },
-  "devDependencies": {
-    "request": "^2.81.0",
-    "tape": "^4.7.0"
   },
   "repository": {
     "type": "git",
