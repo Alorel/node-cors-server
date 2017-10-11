@@ -6,12 +6,14 @@ module.exports = (req, res, next) => {
         let hostname = new URL(req.query.url).hostname;
 
         if (!hostname) {
+            console.log(`Failed to parse target ${req.query.url}`);
             return res.status(400).end(`Failed to parse target ${req.query.url}`);
         }
 
         hostname = hostname.toLowerCase();
 
         if (!config.whitelist.targets.includes(hostname)) {
+            console.log(`Target ${req.query.url} not allowed`);
             return res.status(403).end(`Target ${req.query.url} not allowed`);
         }
 
