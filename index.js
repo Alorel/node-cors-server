@@ -4,15 +4,6 @@ const request = require('request');
 
 app.set('port', (process.env.PORT || 5000));
 
-app.get('/', require('shrink-ray')({
-    threshold: 1,
-    zlib: {
-        level: 9
-    },
-    brotli: {
-        quality: 11
-    }
-}));
 app.get('/', require('./handlers/set-headers'));
 app.get('/', require('./handlers/filter-origin'));
 app.get('/', require('./handlers/filter-querystring'));
