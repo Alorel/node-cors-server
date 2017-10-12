@@ -54,7 +54,7 @@ throng(require('os').cpus().length, id => {
         }
       }
 
-      res.end(rsp.statusCode || 200, body);
+      res.endWith(rsp.statusCode || 200, body);
     });
   });
 
