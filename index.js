@@ -41,7 +41,7 @@ throng(numCPUs, id => {
         }
       }
 
-      res.endWith(rsp.statusCode || 200, body);
+      res.status(rsp.statusCode || 200).end(body);
     });
   });
 
