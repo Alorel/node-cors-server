@@ -1,1 +1,1 @@
-Personal CORS proxy
+Personal CORS proxy for Heroku
