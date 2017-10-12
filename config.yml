@@ -14,3 +14,4 @@ headers:
   X-Frame-Options: deny
   X-XSS-Protection: 1; mode=block
   X-Powered-By: Trump's tiny cocktail sausage fingers
+  X-source-code: https://github.com/Alorel/node-cors-server

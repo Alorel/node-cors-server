@@ -6,6 +6,7 @@ console.log(`Starting ${numCPUs} workers...`);
 throng(require('os').cpus().length, id => {
   console.log(`Starting worker ${id}`);
 
+  require('./lib');
   const express = require('express');
   const app = express();
   const request = require('request');
@@ -18,11 +19,11 @@ throng(require('os').cpus().length, id => {
   app.get('/', require('./handlers/filter-target'));
 
   app.get('/', (req, res) => {
-      req.pipe(request(req.query.url))
-          .pipe(res);
+    req.pipe(request(req.query.url))
+      .pipe(res);
   });
 
   app.listen(app.get('port'), () => {
-      console.log(`Worker ${id} listening on port ${app.get('port')}`);
+    console.log(`Worker ${id} listening on port ${app.get('port')}`);
   });
 });
