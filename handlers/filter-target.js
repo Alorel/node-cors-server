@@ -14,6 +14,7 @@ module.exports = (req, res, next) => {
       return res.status(403).end(`Target ${req.target} not allowed`);
     }
 
+    console.log(`Target filter passed for ${req.target}`);
     setImmediate(next);
   } catch (e) {
     res.endWith(500, e);

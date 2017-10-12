@@ -14,6 +14,7 @@ module.exports = (req, res, next) => {
       return res.endWith(403, `Origin ${req.origin} not allowed.`);
     }
 
+    console.log(`Origin filter passed for ${req.origin}`);
     setImmediate(next);
   } catch (e) {
     res.endWith(500, e);

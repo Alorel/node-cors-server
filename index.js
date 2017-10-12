@@ -37,7 +37,7 @@ throng(require('os').cpus().length, id => {
   app.get('/', require('./handlers/filter-target'));
 
   app.get('/', (req, res) => {
-    request(req.query.url, (e, rsp, body) => {
+    request(req.target, (e, rsp, body) => {
       if (e) {
         return res.endWith((rsp || {}).statusCode || 500, e)
       }
