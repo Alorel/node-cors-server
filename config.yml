@@ -5,6 +5,7 @@ whitelist:
     - github.com
 
 default_port: 5000
+cache_time: 300000
 
 headers:
   Access-Control-Allow-Origin: "*"
