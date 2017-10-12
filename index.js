@@ -28,10 +28,14 @@ throng(numCPUs, id => {
     redis.get(req.target)
       .then(cachedData => {
         if (cachedData) {
+          console.log(`Got cached data for ${req.target}`);
+
           res.header('content-type', cachedData.ctype)
             .status(cachedData.status)
             .end(cachedData.body);
         } else {
+          console.log(`No cached data for ${req.target}. Fetching...`);
+
           request(req.target, (e, rsp, body) => {
             if (e) {
               return res.endWith((rsp || {}).statusCode || 500, e)
@@ -52,6 +56,9 @@ throng(numCPUs, id => {
             const status = rsp.statusCode || 200;
 
             redis.set(req.target, {ctype, status, body})
+              .then(() => {
+                console.log(`Added ${req.target} to cache.`);
+              })
               .catch(e => {
                 console.error(`Failed to set cache for ${req.target}`);
                 console.error(e);
