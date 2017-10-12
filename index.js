@@ -3,7 +3,7 @@ const numCPUs = require('os').cpus().length;
 
 console.log(`Starting ${numCPUs} workers...`);
 
-throng(require('os').cpus().length, id => {
+throng(numCPUs, id => {
   console.log(`Starting worker ${id}`);
 
   require('./lib');
@@ -13,24 +13,11 @@ throng(require('os').cpus().length, id => {
   const htmlmin = require('htmlmin');
   const shrinkRay = require('shrink-ray');
 
-  const HTMLMIN_OPTIONS = {
-    cssmin: true,
-    jsmin: true,
-    removeComments: true,
-    collapseWhitespace: true
-  };
+  const config = require('./config');
 
-  app.set('port', (process.env.PORT || 5000));
+  app.set('port', process.env.PORT || config.default_port);
 
-  app.use(shrinkRay({
-    threshold: 1,
-    zlib: {
-      level: 9
-    },
-    brotli: {
-      quality: 11
-    }
-  }));
+  app.use(shrinkRay(config.shrinkray));
   app.get('/', require('./handlers/set-headers'));
   app.get('/', require('./handlers/filter-origin'));
   app.get('/', require('./handlers/filter-querystring'));
@@ -48,7 +35,7 @@ throng(require('os').cpus().length, id => {
 
       if (ctype.includes('text/html')) {
         try {
-          body = htmlmin(body, HTMLMIN_OPTIONS);
+          body = htmlmin(body, config.htmlmin);
         } catch(e) {
           return res.endWith(500, e);
         }

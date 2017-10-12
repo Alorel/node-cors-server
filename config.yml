@@ -4,6 +4,8 @@ whitelist:
   targets:
     - github.com
 
+default_port: 5000
+
 headers:
   Access-Control-Allow-Origin: "*"
   Access-Control-Allow-Methods: GET
@@ -15,3 +17,17 @@ headers:
   X-XSS-Protection: 1; mode=block
   X-Powered-By: Trump's tiny cocktail sausage fingers
   X-source-code: https://github.com/Alorel/node-cors-server
+
+shrinkray:
+  threshold: 1
+  zlib:
+    level: 9
+  brotli:
+    quality: 11
+
+htmlmin:
+  cssmin: true
+  jsmin: true
+  removeComments: true
+  collapseWhitespace: true
+  removeOptionalTags: true
