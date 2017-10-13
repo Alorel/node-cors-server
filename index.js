@@ -13,8 +13,6 @@ throng(numCPUs, id => {
       console.error(err);
       process.exit(1);
     } else {
-      app.set('port', process.env.PORT || config.default_port);
-
       require('./lib');
       const express = require('express');
       const app = express();
@@ -24,6 +22,7 @@ throng(numCPUs, id => {
       const config = require('./config');
       const redis = require('./lib/redis');
 
+      app.set('port', process.env.PORT || config.default_port);
       app.get('/', shrinkRay(config.shrinkray));
 
       files.sort()
