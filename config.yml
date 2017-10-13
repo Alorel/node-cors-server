@@ -4,6 +4,9 @@ whitelist:
   targets:
     - github.com
 
+blank_response_origins:
+  - alorel-http-proxy.herokuapp.com
+
 default_port: 5000
 cache_time: 300000
 

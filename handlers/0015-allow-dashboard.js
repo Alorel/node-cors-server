@@ -1,7 +1,9 @@
+const blankResponseOrigins = require('../config').blank_response_origins;
+
 module.exports = (req, res, next) => {
-  if (req.originHostname === 'alorel-http-proxy.herokuapp.com') {
-    console.log('Returning HTTP 200 for dashboard request');
-    return res.status(200).end();
+  if (blankResponseOrigins.includes(req.originHostname)) {
+    console.info(`Returning blank 204 response for origin ${req.origin}`);
+    return res.status(204).end();
   }
 
   setImmediate(next);
