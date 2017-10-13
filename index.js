@@ -6,72 +6,81 @@ console.log(`Starting ${numCPUs} workers...`);
 
 throng(numCPUs, id => {
   console.log(`Starting worker ${id}`);
+  process.chdir(__dirname);
 
-  require('./lib');
-  const express = require('express');
-  const app = express();
-  const request = require('request');
-  const htmlmin = require('htmlmin');
-  const shrinkRay = require('shrink-ray');
-  const config = require('./config');
-  const redis = require('./lib/redis');
+  require('fs').readdir('./handlers', 'utf8', (err, files) => {
+    if (err) {
+      console.error(err);
+      process.exit(1);
+    } else {
+      app.set('port', process.env.PORT || config.default_port);
 
-  app.set('port', process.env.PORT || config.default_port);
+      require('./lib');
+      const express = require('express');
+      const app = express();
+      const request = require('request');
+      const htmlmin = require('htmlmin');
+      const shrinkRay = require('shrink-ray');
+      const config = require('./config');
+      const redis = require('./lib/redis');
 
-  app.use(shrinkRay(config.shrinkray));
-  app.get('/', require('./handlers/set-headers'));
-  app.get('/', require('./handlers/filter-origin'));
-  app.get('/', require('./handlers/filter-querystring'));
-  app.get('/', require('./handlers/filter-target'));
+      app.get('/', shrinkRay(config.shrinkray));
 
-  app.get('/', (req, res) => {
-    redis.get(req.target)
-      .then(cachedData => {
-        if (cachedData) {
-          console.log(`Got cached data for ${req.target}`);
+      files.sort()
+        .map(f => `./handlers/${f}`)
+        .map(p => require(p))
+        .forEach(handler => {app.get('/', handler)});
 
-          res.header('content-type', cachedData.ctype)
-            .status(cachedData.status)
-            .end(cachedData.body);
-        } else {
-          console.log(`No cached data for ${req.target}. Fetching...`);
+      app.get('/', (req, res) => {
+        redis.get(req.target)
+          .then(cachedData => {
+            if (cachedData) {
+              console.log(`Got cached data for ${req.target}`);
 
-          request(req.target, (e, rsp, body) => {
-            if (e) {
-              return res.endWith((rsp || {}).statusCode || 500, e)
-            }
+              res.header('content-type', cachedData.ctype)
+                .status(cachedData.status)
+                .end(cachedData.body);
+            } else {
+              console.log(`No cached data for ${req.target}. Fetching...`);
 
-            const ctype = rsp.headers['content-type'];
+              request(req.target, (e, rsp, body) => {
+                if (e) {
+                  return res.endWith((rsp || {}).statusCode || 500, e)
+                }
 
-            res.header('content-type', ctype);
+                const ctype = rsp.headers['content-type'];
 
-            if (ctype.includes('text/html')) {
-              try {
-                body = htmlmin(body, config.htmlmin);
-              } catch(e) {
-                return res.endWith(500, e);
-              }
-            }
+                res.header('content-type', ctype);
 
-            const status = rsp.statusCode || 200;
+                if (ctype.includes('text/html')) {
+                  try {
+                    body = htmlmin(body, config.htmlmin);
+                  } catch(e) {
+                    return res.endWith(500, e);
+                  }
+                }
 
-            redis.set(req.target, {ctype, status, body})
-              .then(() => {
-                console.log(`Added ${req.target} to cache.`);
-              })
-              .catch(e => {
-                console.error(`Failed to set cache for ${req.target}`);
-                console.error(e);
+                const status = rsp.statusCode || 200;
+
+                redis.set(req.target, {ctype, status, body})
+                  .then(() => {
+                    console.log(`Added ${req.target} to cache.`);
+                  })
+                  .catch(e => {
+                    console.error(`Failed to set cache for ${req.target}`);
+                    console.error(e);
+                  });
+
+                res.status(status).end(body);
               });
+            }
+          })
+          .catch(e => res.endWith(500, e));
+      });
 
-            res.status(status).end(body);
-          });
-        }
-      })
-      .catch(e => res.endWith(500, e));
-  });
-
-  app.listen(app.get('port'), () => {
-    console.log(`Worker ${id} listening on port ${app.get('port')}`);
+      app.listen(app.get('port'), () => {
+        console.log(`Worker ${id} listening on port ${app.get('port')}`);
+      });
+    }
   });
 });
