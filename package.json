@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "A CORS-enabled proxy",
   "engines": {
-    "node": "^8.6",
+    "node": "^8.7",
     "npm": "^5.4"
   },
   "main": "index.js",
