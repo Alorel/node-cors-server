@@ -4,6 +4,15 @@ whitelist:
   targets:
     - github.com
 
+github:
+  user: Alorel
+  api_key_env: GH_API_KEY
+
+env:
+  whitelist:
+    origins: ADDITIONAL_WHITELIST_ORIGINS
+    targets: ADDITIONAL_WHITELIST_TARGETS
+
 blank_response_origins:
   - alorel-http-proxy.herokuapp.com
 
