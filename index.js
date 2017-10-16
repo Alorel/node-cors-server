@@ -28,7 +28,9 @@ throng(numCPUs, id => {
         .sort()
         .map(f => `./handlers/${f}`)
         .map(p => require(p))
-        .forEach(handler => {app.get('*', handler)});
+        .forEach(spec => {
+          app.get(spec.match, spec.handler);
+        });
 
       app.get('/', require('./handlers/core/cors'));
       app.get('/github', require('./handlers/core/gh-data'));
