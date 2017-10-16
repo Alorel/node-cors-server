@@ -10,4 +10,12 @@ contents.headers = reduce(contents.headers, (acc, value, key) => {
   return acc;
 }, []);
 
+if (process.env.ADDITIONAL_WHITELIST_ORIGINS) {
+  contents.whitelist.origins.push(...JSON.parse(process.env.ADDITIONAL_WHITELIST_ORIGINS));
+}
+
+if (process.env.ADDITIONAL_WHITELIST_TARGETS) {
+  contents.whitelist.targets.push(...JSON.parse(process.env.ADDITIONAL_WHITELIST_TARGETS));
+}
+
 module.exports = contents;
