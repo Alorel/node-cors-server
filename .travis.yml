@@ -1,7 +1,4 @@
-language: node_js
+language: generic
 sudo: false
-node_js:
-  - 8
 
-install: echo 0
-script: echo 0
+script: true
