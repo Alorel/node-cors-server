@@ -1,5 +1,0 @@
-language: generic
-sudo: false
-script: true
-git:
-  depth: 1
